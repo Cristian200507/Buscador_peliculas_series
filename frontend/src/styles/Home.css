@@ -1,0 +1,318 @@
+/* ====== VARIABLES Y RESET ====== */
+:root {
+    --primary-bg: #0f0f0f;
+    --secondary-bg: #1a1a1a;
+    --card-bg: #1e1e1e;
+    --accent-color: #00ff88;
+    --accent-hover: #00cc6a;
+    --gradient: linear-gradient(135deg, #00ff88 0%, #00ccff 100%);
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --border-radius: 16px;
+    --border-radius-sm: 12px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 12px 40px rgba(0, 255, 136, 0.2);
+    --glass: rgba(255, 255, 255, 0.05);
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--primary-bg);
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+  
+  /* ====== BARRA DE BÚSQUEDA MEJORADA ====== */
+  .searchbar {
+    width: 95%;
+    max-width: 1200px;
+    margin: 30px auto 20px;
+    position: relative;
+  }
+  
+  .searchbar input {
+    width: 100%;
+    padding: 18px 24px 18px 52px;
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    transition: var(--transition);
+    position: relative;
+  }
+  
+  .searchbar input::placeholder {
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+  
+  .searchbar input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.15), var(--shadow);
+    background: rgba(30, 30, 30, 0.8);
+  }
+  
+  .searchbar::before {
+    content: "🔍";
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    font-size: 18px;
+    opacity: 0.7;
+    transition: var(--transition);
+  }
+  
+  .searchbar:focus-within::before {
+    opacity: 1;
+    color: var(--accent-color);
+  }
+  
+  /* ====== FILTROS MEJORADOS ====== */
+  .filters {
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .filters select {
+    padding: 14px 20px;
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-sm);
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+    cursor: pointer;
+    flex: 1;
+    min-width: 150px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23b0b0b0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
+  }
+  
+  .filters select:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+  }
+  
+  .filters select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+  }
+  
+  /* ====== GRID DE CONTENIDOS ====== */
+  .grid {
+    width: 95%;
+    max-width: 1300px;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+  }
+  
+  /* ====== TARJETAS MEJORADAS ====== */
+  .card-item {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .card-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient);
+    transform: scaleX(0);
+    transition: var(--transition);
+    z-index: 1;
+  }
+  
+  .card-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(0, 255, 136, 0.2);
+  }
+  
+  .card-item:hover::before {
+    transform: scaleX(1);
+  }
+  
+  .card-item img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+    transition: var(--transition);
+  }
+  
+  .card-item:hover img {
+    transform: scale(1.05);
+  }
+  
+  /* ====== PAGINACIÓN MEJORADA ====== */
+  .pagination {
+    margin: 50px 0 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .pagination button {
+    padding: 14px 22px;
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+  
+  .pagination button:hover:not(:disabled) {
+    background: var(--accent-color);
+    color: var(--primary-bg);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--accent-color);
+  }
+  
+  .pagination button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .pagination span {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin: 0 12px;
+    padding: 8px 16px;
+    background: var(--glass);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  /* ====== RESPONSIVE ====== */
+  
+  /* Tablets — 3 por fila */
+  @media (max-width: 1024px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+  }
+  
+  /* Tablets pequeñas — 2 por fila */
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    
+    .filters {
+      flex-direction: column;
+    }
+    
+    .filters select {
+      min-width: 100%;
+    }
+    
+    .searchbar input {
+      padding: 16px 20px 16px 48px;
+    }
+    
+    .searchbar::before {
+      left: 16px;
+    }
+  }
+  
+  /* Celulares — 1 por fila */
+  @media (max-width: 480px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    
+    .pagination {
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    
+    .pagination button {
+      padding: 12px 18px;
+      font-size: 13px;
+    }
+    
+    .pagination span {
+      font-size: 0.9rem;
+      margin: 0 8px;
+      padding: 6px 12px;
+    }
+    
+    .card-item img {
+      height: 220px;
+    }
+    
+    .searchbar input {
+      font-size: 14px;
+      padding: 14px 20px 14px 44px;
+    }
+  }
+  
+  /* Efectos de enfoque mejorados para accesibilidad */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+  
+  /* Scrollbar personalizado */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--primary-bg);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-hover);
+  }
