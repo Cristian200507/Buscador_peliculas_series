@@ -1,7 +1,11 @@
 from rest_framework import routers
-from .views import ContenidoViewSet
+from django.urls import path
+from .views import ContenidoViewSet, RegisterView
 
 router = routers.DefaultRouter()
 router.register(r'contenidos', ContenidoViewSet, basename='contenido')
 
-urlpatterns = router.urls
+urlpatterns = [
+    *router.urls,
+    path('register/', RegisterView.as_view(), name='register'),
+]

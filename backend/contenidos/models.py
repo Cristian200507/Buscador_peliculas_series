@@ -15,7 +15,6 @@ class Contenido(models.Model):
         'año',
         validators=[MinValueValidator(1888), MaxValueValidator(datetime.date.today().year + 1)]
     )
-    # generos como lista de strings en JSONField (permite múltiples)
     generos = models.JSONField('géneros', default=list, blank=True)
     productora = models.CharField('productora', max_length=200, blank=True)
     imagen_portada = models.ImageField('imagen de portada', upload_to='portadas/', blank=True, null=True)
