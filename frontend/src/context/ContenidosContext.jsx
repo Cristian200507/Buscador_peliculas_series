@@ -1,10 +1,9 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useCallback } from "react";
 import { getContenidos } from "../api/contenidos";
 
 export const ContenidosContext = createContext();
 
 export function ContenidosProvider({ children }) {
-
   const [contenidos, setContenidos] = useState([]);
   const [filtered, setFiltered] = useState([]);
 
@@ -20,13 +19,22 @@ export function ContenidosProvider({ children }) {
   const [tipo, setTipo] = useState("");
   const [productora, setProductora] = useState("");
   const [director, setDirector] = useState("");
-  const [order, setOrder] = useState(""); // asc - desc
+  const [order, setOrder] = useState("");
+
+  // estados de carga y error
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   // --- Cargar datos desde el backend ---
-  const loadData = async (page = 1) => {
+  const loadContenidos = useCallback(async (pageNumber = 1) => {
+    const token = localStorage.getItem("access");
+    if (!token) return; // ⛔ Evita llamadas sin token
+
+    setLoading(true);
+    setError("");
 
     const params = {
-      page,
+      page: pageNumber,
       search: search || undefined,
       genero: genero || undefined,
       tipo: tipo || undefined,
@@ -35,28 +43,34 @@ export function ContenidosProvider({ children }) {
       ordering: order === "asc" ? "anio" : order === "desc" ? "-anio" : undefined,
     };
 
-    const data = await getContenidos(params);
+    try {
+      const data = await getContenidos(params);
 
-    setContenidos(data.results);
-    setFiltered(data.results);
+      setContenidos(data.results);
+      setFiltered(data.results);
 
-    setNextPage(data.next);
-    setPrevPage(data.previous);
-    setTotalPages(Math.ceil(data.count / data.results.length));
-  };
+      setNextPage(data.next);
+      setPrevPage(data.previous);
+      setTotalPages(Math.ceil(data.count / data.results.length));
+    } catch (err) {
+      console.error(err);
+      setError("Error al cargar los contenidos. Intenta recargar.");
+    } finally {
+      setLoading(false);
+    }
+  }, [search, genero, tipo, productora, director, order]);
 
   // --- Cuando cambia la página ---
   useEffect(() => {
-    loadData(page);
-  }, [page]);
+    loadContenidos(page);
+  }, [page, loadContenidos]);
 
-  // --- Cuando cambian los filtros, reinicia a página 1 ---
+  // --- Cuando cambian los filtros ---
   useEffect(() => {
     setPage(1);
-    loadData(1);
-  }, [search, genero, tipo, productora, director, order]);
+    loadContenidos(1);
+  }, [search, genero, tipo, productora, director, order, loadContenidos]);
 
-  // botones de paginación
   const goNext = () => {
     if (nextPage) setPage(prev => prev + 1);
   };
@@ -84,7 +98,12 @@ export function ContenidosProvider({ children }) {
       tipo, setTipo,
       productora, setProductora,
       director, setDirector,
-      order, setOrder
+      order, setOrder,
+
+      // carga y errores
+      loading,
+      error,
+      loadContenidos,
     }}>
       {children}
     </ContenidosContext.Provider>

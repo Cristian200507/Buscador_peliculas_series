@@ -316,3 +316,25 @@
   ::-webkit-scrollbar-thumb:hover {
     background: var(--accent-hover);
   }
+
+  .logout-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+  }
+  
+  .logout-btn {
+    background: crimson;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+  }
+  
+  .logout-btn:hover {
+    background: rgb(190, 0, 30);
+  }
+  

@@ -1,0 +1,116 @@
+.login-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--secondary-bg);
+  padding: 40px 50px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  width: 350px;
+  text-align: center;
+}
+  
+  /* Título */
+  .login-container h2 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  /* ====== FORMULARIO ====== */
+  .login-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  
+  .login-container input {
+    padding: 16px 20px;
+    background: var(--glass);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--border-radius-sm);
+    color: var(--text-primary);
+    font-size: 15px;
+    transition: var(--transition);
+    backdrop-filter: blur(20px);
+  }
+  
+  .login-container input::placeholder {
+    color: var(--text-secondary);
+  }
+  
+  .login-container input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.15), var(--shadow-hover);
+    background: rgba(30, 30, 30, 0.85);
+  }
+  
+  /* ====== BOTÓN ====== */
+  .login-container button {
+    padding: 16px;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    background: var(--gradient);
+    color: var(--primary-bg);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    letter-spacing: 0.5px;
+    box-shadow: var(--shadow);
+  }
+  
+  .login-container button:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+  }
+  
+  /* ====== MENSAJE DE ERROR ====== */
+  .login-container p {
+    text-align: center;
+    font-size: 14px;
+    color: rgb(255, 80, 80);
+    font-weight: 600;
+    margin-top: 10px;
+  }
+  
+  /* ====== ANIMACIÓN ====== */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 480px) {
+    .login-container {
+      padding: 30px;
+      margin-top: 60px;
+    }
+    
+    .login-container h2 {
+      font-size: 24px;
+    }
+    
+    .login-container input {
+      font-size: 14px;
+      padding: 14px 16px;
+    }
+    
+    .login-container button {
+      padding: 14px;
+      font-size: 15px;
+    }
+  }
+  
