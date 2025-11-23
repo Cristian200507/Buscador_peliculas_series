@@ -7,7 +7,7 @@ export default function Filters() {
     setGenero, setTipo, setProductora, setDirector, setOrder
   } = useContext(ContenidosContext);
 
-  // Obtener valores únicos
+
   const generos = [...new Set(contenidos.flatMap(c => c.generos))];
   const tipos = [...new Set(contenidos.map(c => c.tipo))];
   const productoras = [...new Set(contenidos.map(c => c.productora))];
@@ -15,7 +15,6 @@ export default function Filters() {
 
   return (
     <div className="filters">
-      {/* GÉNERO */}
       <select onChange={(e) => setGenero(e.target.value)}>
         <option value="">Género</option>
         {generos.map(g => (
@@ -23,7 +22,6 @@ export default function Filters() {
         ))}
       </select>
 
-      {/* TIPO */}
       <select onChange={(e) => setTipo(e.target.value)}>
         <option value="">Tipo</option>
         {tipos.map(t => (
@@ -31,7 +29,6 @@ export default function Filters() {
         ))}
       </select>
 
-      {/* PRODUCTORA */}
       <select onChange={(e) => setProductora(e.target.value)}>
         <option value="">Productora</option>
         {productoras.map(p => (
@@ -39,7 +36,6 @@ export default function Filters() {
         ))}
       </select>
 
-      {/* DIRECTOR */}
       <select onChange={(e) => setDirector(e.target.value)}>
         <option value="">Director</option>
         {directores.map(d => (
@@ -47,7 +43,6 @@ export default function Filters() {
         ))}
       </select>
 
-      {/* ORDEN */}
       <select onChange={(e) => setOrder(e.target.value)}>
         <option value="">Ordenar por año</option>
         <option value="asc">Ascendente</option>

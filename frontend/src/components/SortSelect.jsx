@@ -1,4 +1,3 @@
-// src/components/SortSelect.jsx
 import React from "react";
 
 export default function SortSelect({ ordering, onChange }) {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import "../styles/Login.css"; // Usamos el mismo CSS por ahora
+import "../styles/Login.css";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -31,7 +31,7 @@ export default function Register() {
       });
 
       setSuccess("Registro exitoso. Redirigiendo al login...");
-      setTimeout(() => navigate("/login"), 2000); // Redirige a login después de 2s
+      setTimeout(() => navigate("/login"), 2000);
 
     } catch (err) {
       if (err.response && err.response.data) {

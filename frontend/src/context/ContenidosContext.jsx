@@ -7,13 +7,11 @@ export function ContenidosProvider({ children }) {
   const [contenidos, setContenidos] = useState([]);
   const [filtered, setFiltered] = useState([]);
 
-  // paginación
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [nextPage, setNextPage] = useState(null);
   const [prevPage, setPrevPage] = useState(null);
 
-  // filtros
   const [search, setSearch] = useState("");
   const [genero, setGenero] = useState("");
   const [tipo, setTipo] = useState("");
@@ -21,14 +19,12 @@ export function ContenidosProvider({ children }) {
   const [director, setDirector] = useState("");
   const [order, setOrder] = useState("");
 
-  // estados de carga y error
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // --- Cargar datos desde el backend ---
   const loadContenidos = useCallback(async (pageNumber = 1) => {
     const token = localStorage.getItem("access");
-    if (!token) return; // ⛔ Evita llamadas sin token
+    if (!token) return;
 
     setLoading(true);
     setError("");
@@ -60,12 +56,10 @@ export function ContenidosProvider({ children }) {
     }
   }, [search, genero, tipo, productora, director, order]);
 
-  // --- Cuando cambia la página ---
   useEffect(() => {
     loadContenidos(page);
   }, [page, loadContenidos]);
 
-  // --- Cuando cambian los filtros ---
   useEffect(() => {
     setPage(1);
     loadContenidos(1);
@@ -84,7 +78,6 @@ export function ContenidosProvider({ children }) {
       contenidos,
       filtered,
 
-      // paginación
       page, setPage,
       totalPages,
       nextPage,
@@ -92,7 +85,6 @@ export function ContenidosProvider({ children }) {
       goNext,
       goPrev,
 
-      // filtros
       search, setSearch,
       genero, setGenero,
       tipo, setTipo,
@@ -100,7 +92,6 @@ export function ContenidosProvider({ children }) {
       director, setDirector,
       order, setOrder,
 
-      // carga y errores
       loading,
       error,
       loadContenidos,
